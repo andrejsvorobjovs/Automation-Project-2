@@ -24,8 +24,6 @@ describe('Add Tests for Time Tracking', () => {
 
         //Assert, that estimation is added and visible (DO NOT WORK DUE TO JIRA BUG!)
         //cy.get('[placeholder="Number"]').should('have.value','37');
-        
-        //cy.get('@timeLogged').should('contain', '2h logged', { timeout: 10000 });
     });
 
 
@@ -75,7 +73,6 @@ describe('Add Tests for Time Tracking', () => {
         cy.get('[data-testid="modal:tracking"]').should('be.visible');
        
         //Enter value 71 to the first field “Time spent”
-        cy.get('[placeholder="Number"]').eq(1).clear();
         cy.get('[placeholder="Number"]').eq(1).type(71);
         
         //Enter value 138 to the second field “Time remaining” and click button "Done"
@@ -85,7 +82,7 @@ describe('Add Tests for Time Tracking', () => {
 
 
 
-    it.only('Remove logged time)', () => {
+    it('Remove logged time)', () => {
    
         //Click on time tracking section to add log time
         cy.get('[data-testid="icon:stopwatch"]').click();
@@ -98,7 +95,10 @@ describe('Add Tests for Time Tracking', () => {
         cy.get('[placeholder="Number"]').eq(2).clear();
         cy.contains('button', 'Done').click();
         
-        //Check that values have been deleted
-        //cy.get('[placeholder="Number"]').eq(2).type(138);
+        //User sees original estimation in the time tracking section and added time remaining value is removed
+        cy.get('[data-testid="icon:stopwatch"]').click();
+        cy.get('[placeholder="Number"]').eq(1).should('be.empty');    //Original time estimation is not visible! JIRA BUG!
+        cy.get('[placeholder="Number"]').eq(2).should('be.empty');
+        cy.contains('button', 'Done').click();
     });
 });
