@@ -9,7 +9,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it.only('Add estimation)', () => {
+    it.skip('Add estimation)', () => {
 
         //Add estimation
         cy.get('[placeholder="Number"]').clear();
@@ -29,7 +29,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it('Update estimation)', () => {
+    it.skip('Update estimation)', () => {
 
         //Update estimation
         cy.get('[placeholder="Number"]').clear();
@@ -45,7 +45,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it('Remove estimation)', () => {
+    it.skip('Remove estimation)', () => {
 
         //Remove estimation
         cy.get('[placeholder="Number"]').clear();
@@ -66,7 +66,7 @@ describe('Add Tests for Time Tracking', () => {
 
     //Time logging functionality
 
-    it.skip('Log time)', () => {
+    it('Log time)', () => {
    
         //Click on time tracking section to add log time
         cy.get('[data-testid="icon:stopwatch"]').click();
@@ -74,17 +74,18 @@ describe('Add Tests for Time Tracking', () => {
         //Check that time tracking pop-up dialogue is opened
         cy.get('[data-testid="modal:tracking"]').should('be.visible');
        
-        //Enter value 2 to the field “Time spent”
-        cy.get('[placeholder="Number"]').eq(1).type(2);
+        //Enter value 71 to the first field “Time spent”
+        cy.get('[placeholder="Number"]').eq(1).clear();
+        cy.get('[placeholder="Number"]').eq(1).type(71);
         
-        //Enter value 5 to the field “Time remaining” and click button "Done"
-        cy.get('[placeholder="Number"]').eq(2).type(5);
+        //Enter value 138 to the second field “Time remaining” and click button "Done"
+        cy.get('[placeholder="Number"]').eq(2).type(138);   //JIRA BUG! It does NOT save second value field!
         cy.contains('button', 'Done').click();
     });
 
 
 
-    it.skip('Remove logged time)', () => {
+    it.only('Remove logged time)', () => {
    
         //Click on time tracking section to add log time
         cy.get('[data-testid="icon:stopwatch"]').click();
@@ -92,11 +93,12 @@ describe('Add Tests for Time Tracking', () => {
         //Check that time tracking pop-up dialogue is opened
         cy.get('[data-testid="modal:tracking"]').should('be.visible');
        
-        //Enter value 2 to the field “Time spent”
-        cy.get('[placeholder="Number"]').eq(1).type(2);
-        
-        //Enter value 5 to the field “Time remaining” and click button "Done"
-        cy.get('[placeholder="Number"]').eq(2).type(5);
+        //Remove all values to both fields
+        cy.get('[placeholder="Number"]').eq(1).clear();
+        cy.get('[placeholder="Number"]').eq(2).clear();
         cy.contains('button', 'Done').click();
+        
+        //Check that values have been deleted
+        //cy.get('[placeholder="Number"]').eq(2).type(138);
     });
 });
