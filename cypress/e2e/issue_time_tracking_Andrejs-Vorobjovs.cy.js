@@ -10,13 +10,18 @@ describe('Add Tests for Time Tracking', () => {
 
 
     it.only('Add estimation)', () => {
-   
+
+        //Add estimation
         cy.get('[placeholder="Number"]').clear();
         cy.get('[placeholder="Number"]').type("37")
         cy.get('[data-testid="icon:close"]').first().click();
 
+        //Open the same issue again
+        cy.get('[data-testid="board-list:backlog"]').first().click();
+        cy.get('[data-testid="modal:issue-details"]').should('be.visible');
+
         //Assert, that estimation is added and visible
-        cy.get('input[placeholder="Number"]').should('have.value','');
+        cy.get('[placeholder="Number"]').should('have.value','37');
         
         //cy.get('@timeLogged').should('contain', '2h logged', { timeout: 10000 });
     });
@@ -24,19 +29,29 @@ describe('Add Tests for Time Tracking', () => {
 
     it('Update estimation)', () => {
 
+        //Update estimation
         cy.get('[placeholder="Number"]').clear();
         cy.get('[placeholder="Number"]').type("142")
         cy.get('[data-testid="icon:close"]').first().click();
 
+        //Open the same issue again
+        cy.get('[data-testid="board-list:backlog"]').first().click();
+        cy.get('[data-testid="modal:issue-details"]').should('be.visible');
+
         //Assert that updated value is visible
-        cy.get('input[placeholder="Number"]').should('have.value','');
+        cy.get('input[placeholder="Number"]').should('have.value','142');
     });
 
 
     it('Remove estimation)', () => {
 
+        //Remove estimation
         cy.get('[placeholder="Number"]').clear();
         cy.get('[data-testid="icon:close"]').first().click();
+
+        //Open the same issue again
+        cy.get('[data-testid="board-list:backlog"]').first().click();
+        cy.get('[data-testid="modal:issue-details"]').should('be.visible');
         
         //Assert that value is removed
         cy.get('input[placeholder="Number"]').should('have.value','');
