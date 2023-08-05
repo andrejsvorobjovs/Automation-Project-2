@@ -9,7 +9,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it.skip('Add estimation)', () => {
+    it('Add estimation)', () => {
 
         //Add estimation
         cy.get('[placeholder="Number"]').clear();
@@ -27,7 +27,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it.skip('Update estimation)', () => {
+    it('Update estimation)', () => {
 
         //Update estimation
         cy.get('[placeholder="Number"]').clear();
@@ -43,7 +43,7 @@ describe('Add Tests for Time Tracking', () => {
     });
 
 
-    it.skip('Remove estimation)', () => {
+    it('Remove estimation)', () => {
 
         //Remove estimation
         cy.get('[placeholder="Number"]').clear();
@@ -97,7 +97,7 @@ describe('Add Tests for Time Tracking', () => {
         
         //User sees original estimation in the time tracking section and added time remaining value is removed
         cy.get('[data-testid="icon:stopwatch"]').click();
-        cy.get('[placeholder="Number"]').eq(1).should('be.empty');    //Original time estimation is not visible! JIRA BUG!
+        cy.get('[placeholder="Number"]').eq(1).should('be.empty');    //Original (default) time estimation is not visible! JIRA BUG!
         cy.get('[placeholder="Number"]').eq(2).should('be.empty');
         cy.contains('button', 'Done').click();
     });
